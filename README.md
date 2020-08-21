@@ -16,31 +16,30 @@ Does creating a new RecyclerView excite you? Well, with these components you are
   - [x] Add ItemSelection with two-way communication  
 
 ### Getting Started ###
-To get started using the ResponseAdapter, create the simplest use case: a non-responsive Adapter 
+To get started using the ResponseAdapter 
 1. Add an implementation of this class to your Fragment
     * `val adapter = object: ResponseAdapter(R.layout.vh_example) {}`
-2. Override getItemCount, provide the size of your dataset
-    * `override fun getItemCount() = array?.size ?: 0`
-3. Override bindView
-    * `override fun bindView(v: View, index: Int) {}`
+2. Override `getItemCount(): Int`
+    * Can be a static number or the size of a list/array
+    * If using a variable number or dataset, call notifyDataSetChanged() to update the views
+3. Override `bindView(v: View, index: Int)`
+    * Use the view parameter to access the layout with `v.findViewById<>()` or Kotlinx
+      * Use `v.findViewById<>()` if view resources are in another module
     * Use the index parameter to retrieve the data
       * Use convenience methods: `getFromArray(index, array)` or `getFromList(index, list)`
-    * Use the view parameter to access the layout with `v.findViewById<>()` or synthetic Kotlinx
-      * Use `v.findViewById<>()` if resource ids are in another module
+      * These methods safely access the array or list, whether it is null or the index is out of bounds
+ 4. Override `respond(index: Int, action: String? = null)`
+    * When ResponseVH `action(String?)` is called, ResponseAdapter `respond(Int, String?)` handles it
+      * Use `val data = getFromArray(index, arrayList)` to obtain the data that was clicked
+      
+ ### Default Click Response Behaviour ###
+  * By default a ClickListener is set on ResponseVH root view, which calls `action(null)`
+    * To prevent Click listener setup, set the second constructor parameter of ResponseAdapter to false
+  * To set your own listeners, override `initViewListeners(v: View, vh: ResponseVH)`
+    * Inside each listener call `vh.action(String?)`
+    * Provide a different string for each type of action you want to perform
 
 ### Optional Features ###
-#### ViewHolder ClickResponse ####
-In the ResponseAdapter subclass, you must override 2 methods. The initViewListeners(v, vh) method sets up response triggers and respond(index, action) handles them.
-
-* `initViewListeners(v: View, vh: ResponseVH) {}`
-    * Set Listeners on the views, using v and findViewById or synthetic Kotlinx
-    * Inside each listener call `vh.action(string)`
-      * Use the string to differentiate between Listeners and desired responses to these events
-      * If your use case is simple, you can omit the action string
-
-* `respond(index: Int, action: String? = null) {}`
-    * Generally, this function starts with `val data = getFromArray(index, array)` and then `when (action) {}`
-      * If your use case is simple, you can ignore action and focus on data or index
 
 #### ListItemSelection ####
 *This version was built for data that is retrieved on Fragment Start, and updated on Fragment Stop.*
