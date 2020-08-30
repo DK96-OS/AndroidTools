@@ -30,8 +30,6 @@ fun formatDateNoTime(ctx: Context?, time: Long)
 /** Display a Toast */
 fun Context.showToast(s: String, t: Int = Toast.LENGTH_SHORT) { Toast.makeText(this, s, t).show() }
 
-fun Context.getConnectivityMgr() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
 /** Requires the Fragment to be attached to a Context first
  * @param id The Drawable Resource id */
 fun Fragment.getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)
