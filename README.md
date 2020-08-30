@@ -62,3 +62,18 @@ Add an instance of ListItemSelectionManager to your Fragment class. This compone
       * Call `getSelectedIndices()` and update your persisted data model with the selected data
       * Calling `clear()` will notify the Adapter unnnecessarily, just let it be destroyed with the Fragment
     * If your dataset indices change, you should call `clear()` before updating the dataset
+    
+## Context ##
+The Context class is the gateway to system services and resources. Sometimes, certain functions involving Context will appear repeatedly throughout projects. This package includes some of these commonly used functions.
+### NetworkObserver ###
+Internet access management is a very common task in app development. The recommended Android API for Networks has changed over time, and not in a small way. The classes that were once given for this purpose have been entirely deprecated.
+
+The NetworkObserver makes these changes less important to you, especially if you just want to know, yes or no, is there  internet access. The steps to implementing this component are:
+1. Construct your NetworkObserver in a ViewModel
+2. In every Activity that needs to know about Network state: 
+   * Register the NetworkObserver with the Context, call `registerWith(this)` in `onStart`
+   * Unregister the NetworkObserver, call `unregisterWith(this)` in `onStop`
+3. Call `getLiveData()` and observe the network status where it is required for your project
+   * Alternatively, use `getCurrentValue()` to obtain the value once
+#### Network Constraints ####
+If you have tasks that are better suited for specific types of networks, such as Wifi vs Mobile data, then you will need to override `buildNetworkRequest()` and use `NetworkRequest.Builder()` to specify the network constraints that will apply. Check the documentation on NetworkRequest for details on network constraints.
