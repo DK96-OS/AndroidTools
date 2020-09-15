@@ -21,7 +21,7 @@ To get started using the ResponseAdapter
     * `val adapter = object: ResponseAdapter(R.layout.vh_example) {}`
 2. Override `getItemCount(): Int`
     * Can be a static number or the size of a list/array
-    * If using a variable number or dataset, call notifyDataSetChanged() to update the views
+    * If using a variable number or dataset, call `notifyDataSetChanged()` to update the views
 3. Override `bindView(v: View, index: Int)`
     * Use the view parameter to access the layout with `v.findViewById<>()` or Kotlinx
       * Use `v.findViewById<>()` if view resources are in another module
@@ -33,8 +33,9 @@ To get started using the ResponseAdapter
       * Use `val data = getFromArray(index, arrayList)` to obtain the data that was clicked
       
  ### Default Click Response Behaviour ###
-  * By default a ClickListener is set on ResponseVH root view, which calls `action(null)`
-    * To prevent Click listener setup, set the second constructor parameter of ResponseAdapter to false
+  * By default a ClickListener is set on ResponseVH root view, which calls `vh.action(null)`
+    * This triggers a call to `respond()` when the root view is clicked
+    * To disable this behaviour, set the second constructor parameter of ResponseAdapter to false
   * To set your own listeners, override `initViewListeners(v: View, vh: ResponseVH)`
     * Inside each listener call `vh.action(String?)`
     * Provide a different string for each type of action you want to perform
@@ -70,10 +71,10 @@ Internet access management is a very common task in app development. The recomme
 
 The NetworkObserver makes these changes less important to you, especially if you just want to know, yes or no, is there  internet access. The steps to implementing this component are:
 1. Construct your NetworkObserver in a ViewModel
-2. In every Activity that needs to know about Network state: 
-   * Register the NetworkObserver with the Context, call `registerWith(this)` in `onStart`
-   * Unregister the NetworkObserver, call `unregisterWith(this)` in `onStop`
-3. Call `getLiveData()` and observe the network status where it is required for your project
-   * Alternatively, use `getCurrentValue()` to obtain the value once
+2. In every Activity that hosts a fragment that uses NetworkObserver:
+   * Register the NetworkObserver in `onStart` by calling `registerWith(this)`
+   * Unregister the NetworkObserver in `onStop` with `unregisterWith(this)`
+3. Call `getLiveData()` and observe it in your fragments/lifecycleOwners
+   * Alternatively, use `getCurrentValue()`
 #### Network Constraints ####
-If you have tasks that are better suited for specific types of networks, such as Wifi vs Mobile data, then you will need to override `buildNetworkRequest()` and use `NetworkRequest.Builder()` to specify the network constraints that will apply. Check the documentation on NetworkRequest for details on network constraints.
+If you have tasks that are better suited for specific types of networks, such as WiFi vs Mobile data, then you will need to override `buildNetworkRequest()` and use `NetworkRequest.Builder()` to specify the network constraints that will apply. Check the documentation on NetworkRequest for details on network constraints.
