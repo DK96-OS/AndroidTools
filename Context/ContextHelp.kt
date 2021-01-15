@@ -38,3 +38,9 @@ fun Fragment.getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requi
  * Use when starting another Activity: startActivity(intent, activity.getTransitionBundle()) */
 fun Activity.getTransitionBundle()
         : Bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+
+/** Requests that the Soft Input Keyboard be hidden if shown */
+fun Activity.hideKeyboard() {
+    val ime = getSystemService(InputMethodManager::class.java)
+    ime?.hideSoftInputFromWindow(window.decorView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+}
