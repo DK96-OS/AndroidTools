@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
+@Deprecated("Use a ViewHolder that supports ViewBinding")
 /** Reusable ViewHolder solution for easy RecyclerView setup */
 open class ResponseVH(v: View, listener: Listener): RecyclerView.ViewHolder(v) {
 
@@ -28,5 +29,4 @@ open class ResponseVH(v: View, listener: Listener): RecyclerView.ViewHolder(v) {
     /** Sends an action to the Listener, along with the ViewHolder's current index
      * @param ra "ResponseAction" - A key determining the intended response to a ClickListener  */
     fun action(ra: String? = null) { rvhListener.get()?.respond(adapterPosition, ra) }
-
 }

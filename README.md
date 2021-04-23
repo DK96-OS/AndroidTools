@@ -2,7 +2,7 @@
 **A collection of software components for simplifying Android application development.**
 
 ## RecyclerView ##
-Does creating a new RecyclerView excite you? Well, with these components you are going to be excited for sure! The benefits of having these classes in your project include:
+RecyclerView is everywhere! With these components in your project, you will receive many benefits:
 * **Time Efficiency**
   - [x] No more ViewHolder classes required
   - [x] Fewer abstract methods, more open methods
@@ -16,8 +16,14 @@ Does creating a new RecyclerView excite you? Well, with these components you are
   - [x] Add ItemSelection with two-way communication  
 
 ### Getting Started ###
-To get started using the ResponseAdapter 
-1. Add an implementation of this class to your Fragment
+
+**ResponseAdapter**
+> __Note: ResponseAdapter is deprecated__ 
+> 
+> It was built for use with the Kotlin-android-extensions plugin which is deprecated. A replacement with similar API surface is in testing.
+
+To use the ResponseAdapter 
+1. Add an instance of this class to your Fragment
     * `val adapter = object: ResponseAdapter(R.layout.vh_example) {}`
 2. Override `getItemCount(): Int`
     * Can be a static number or the size of a list/array
@@ -49,7 +55,6 @@ To get started using the ResponseAdapter
 Add an instance of ListItemSelectionManager to your Fragment class. This component automatically notifies the ResponseAdapter when an item selection state changes.
 1. Update the ResponseAdapter declaration
     * The ResponseAdapter must implement the ListItemSelectionManager.Listener interface.
-      * This override method does not need to be written
 2. Update ResponseAdapter viewListener and response methods to include item selection events
     * In the response handler, call the ListItemSelectionManager's selectIndex method
 3. Interact with ListItemSelectionManager 

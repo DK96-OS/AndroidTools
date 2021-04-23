@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
+@Deprecated("Use an adapter that supports ViewBinding", 
+            level = DeprecationLevel.WARNING)
 /** A RecyclerView Adapter framework for producing responsive lists of Views */
 abstract class ResponseAdapter(
     /** The Layout Resource Id to inflate for every ViewHolder */
