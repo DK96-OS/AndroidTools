@@ -2,12 +2,10 @@ import android.text.format.DateUtils
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 
