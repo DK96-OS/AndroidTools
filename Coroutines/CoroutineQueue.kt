@@ -36,7 +36,6 @@ class CoroutineQueue<T>(capacity:Int) {
 		var task: Deferred<T>? = mQueue.poll()
 		while (task != null) {
 			task.await()
-			if (mQueue.size > 2) mQueue.poll()?.await()
 			task = mQueue.poll()
 		}
 	}
