@@ -4,7 +4,8 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
 
-/** Coordinate management for drawing within a Frame */
+/** Coordinate management for drawing within a Frame
+  * DK96-OS : 2021 */
 open class DrawingFrame {
 
     /** The pixel locations of the frame boundaries */
