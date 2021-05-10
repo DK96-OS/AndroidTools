@@ -1,5 +1,5 @@
 # AndroidTools
-**A collection of software components for simplifying Android application development.**
+**A collection of software components for simplifying Android app development.**
 
 ***
 
@@ -10,7 +10,7 @@ Flexible and convenient Adapters for `RecyclerView`.
  - Paging
  - AsyncList Diff
 
-Check out the RecyclerView wiki.
+Check out the [RecyclerView wiki](https://github.com/DK96-OS/AndroidTools/wiki/RecyclerView).
 
 ***
 
@@ -21,15 +21,15 @@ Android system resource management.
  - `Activity` Transitions
  - Software Keyboard
 
-Check out the Context wiki.
+Check out the [Context wiki](https://github.com/DK96-OS/AndroidTools/wiki/Context).
 
 ***
 
-### Coroutine
+### Coroutines
 Asynchronous micro thread management.
  - Coroutine Queue
 
-Check out the Coroutine wiki.
+Check out the [Coroutines wiki](https://github.com/DK96-OS/AndroidTools/wiki/Coroutines).
 
 ***
 
@@ -38,4 +38,4 @@ Custom View graphics management.
  - Drawing Coordinate calculations
  - `Paint` object management
 
-Check out the Drawing Wiki.
+Check out the [Drawing wiki](https://github.com/DK96-OS/AndroidTools/wiki/Drawing).
