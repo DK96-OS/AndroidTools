@@ -10,12 +10,12 @@ import kotlin.collections.ArrayList
 
 /** Simple Queue for awaiting asynchronous coroutines
   * DK96-OS : 2021 */
-class CoroutineQueue<T>(capacity:Int) {
+class CoroutineQueue<T>(capacity: Int) {
 	private val mQueue: Queue<Deferred<T>> = ArrayBlockingQueue(capacity, true)
 
 	/** Add a deferred result to the Queue
 	 * @return True if the queue allowed the task to be added (didn't exceed capacity) */
-	fun add(task:Deferred<T>) = mQueue.offer(task)
+	fun add(task: Deferred<T>) = mQueue.offer(task)
 
 	/** Block until next coroutine finishes, returns null if empty queue */
 	suspend fun awaitNext(): T? = mQueue.poll()?.await()
@@ -47,7 +47,11 @@ class CoroutineQueue<T>(capacity:Int) {
 	}
 
 	companion object {
-		suspend fun <A, B> transformList(input:List<A>, f:(A) -> B): List<B>? {
+		/** Performs a suspendable transformation function on a list using a CoroutineQueue */
+		suspend fun <A, B> transformList(
+			input: List<A>, 
+			f: suspend (A) -> B
+		): ArrayList<B>? {
 			val c = CoroutineQueue<B>(input.size)
 			coroutineScope {input.forEach {
 				c.add(async(Dispatchers.IO) { f(it) })
