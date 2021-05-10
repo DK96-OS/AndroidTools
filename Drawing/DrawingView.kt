@@ -4,7 +4,8 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 
-/** Minimalist Drawing view abstraction */
+/** Minimalist Drawing view abstraction
+  * DK96-OS : 2021 */
 abstract class DrawingView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
 
 	protected open fun newPaint(vararg args: Int)
