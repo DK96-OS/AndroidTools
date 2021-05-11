@@ -13,6 +13,8 @@ import kotlin.collections.ArrayList
 class CoroutineQueue<T>(capacity: Int) {
 	private val mQueue: Queue<Deferred<T>> = ArrayBlockingQueue(capacity, true)
 
+	val count: Int get() = mQueue.size
+	
 	/** Add a deferred result to the Queue
 	 * @return True if the queue allowed the task to be added (didn't exceed capacity) */
 	fun add(task: Deferred<T>) = mQueue.offer(task)
@@ -42,21 +44,25 @@ class CoroutineQueue<T>(capacity: Int) {
 
 	/** Tries to cancel everything in the queue */
 	fun cancel(cause: CancellationException? = null) {
-		mQueue.forEach {it.cancel(cause)}
+		mQueue.forEach { it.cancel(cause) }
 		mQueue.clear()
 	}
 
 	companion object {
-		/** Performs a suspendable transformation function on a list using a CoroutineQueue */
+		/** Applies a suspendable transformation on a list using the CoroutineQueue
+		 * Skips using CoroutineQueue if input size is less than 2 */
 		suspend fun <A, B> transformList(
-			input: List<A>, 
-			f: suspend (A) -> B
-		): ArrayList<B>? {
-			val c = CoroutineQueue<B>(input.size)
-			coroutineScope {input.forEach {
-				c.add(async(Dispatchers.IO) { f(it) })
-			} }
-			return c.awaitList()
+			input: List<A>, transform: suspend (A) -> B
+		): ArrayList<B> = when (input.size) {
+			0 -> arrayListOf()
+			1 -> arrayListOf(transform(input[0]))
+			else -> {
+				val c = CoroutineQueue<B>(input.size)
+				coroutineScope {input.forEach {a ->
+					c.add(async(Dispatchers.IO) { transform(a) })
+				} }
+				c.awaitList()
+			}
 		}
 	}
 }
