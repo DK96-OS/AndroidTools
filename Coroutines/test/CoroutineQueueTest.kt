@@ -15,24 +15,19 @@ import kotlin.random.Random
 class CoroutineQueueTest {
 
 	/** Data structure used as coroutine input for tests */
-	private class ProcessInput(
-    val stream: ByteArray, 
-    val key: Byte
-  )
+	private class ProcessInput(val stream: ByteArray, val key: Byte)
 
 	/** Data structure for coroutine output */
-	private class ProcessOutput(
-    val title: String, 
-    val index: Int
-  ) {
-		val createTime: Long = System.nanoTime() // Reveals when this object is created
+	private class ProcessOutput(val title: String, val index: Int) {
+		/** Reveals when this object is created */
+		val createTime: Long = System.nanoTime()
 	}
 
-	/** The capacity is the size of the input list, and capacity of the queue */
+	/** The capacity is the size of the input list */
 	private val capacity = 1000
 	private lateinit var q1: CoroutineQueue<ProcessOutput>
 
-  /** Generate immutable input data to be used in all tests */
+  	/** Generate immutable input data to be used in all tests */
 	private val inputList: List<ProcessInput> = Array(capacity) {ProcessInput(
 		stream = Random.nextBytes(64).sortedArray(),	// sort to avoid string init issues
 		key = Random.nextInt().ushr(25).toByte()	// shift to remove negatives
@@ -112,11 +107,31 @@ class CoroutineQueueTest {
 	@Test fun testTransformListFunction() {
 		runBlocking {
 			val output = CoroutineQueue.transformList(inputList) {
-				runBlocking {delay(20)}
+				delay(20)
 				ProcessOutput(String(it.stream), it.key.toInt())
 			}
 			assertEquals(capacity, output.size)
 			for (out in output) assertEquals(64, out.title.length)
+		}
+	}
+	
+	@Test fun testTransformNullability() {
+		runBlocking {
+			val nullTestInputs = listOf(1, 2, 3, 4, 5, 6)
+			val output = CoroutineQueue.transformList(nullTestInputs) {
+				when {
+					it % 2 == 0 -> "Even"
+					it % 3 == 0 -> "Three"
+					else -> null
+				}
+			}
+				// 1 is removed because null
+			assertEquals("Even", output[0])		// Two is even
+			assertEquals("Three", output[1]) 	// Three
+			assertEquals("Even", output[2])		// Four is even
+				// Five is null
+			assertEquals("Even", output[3])		// Six is even
+			assertEquals(4, output.size)
 		}
 	}
 }
