@@ -10,16 +10,17 @@ import kotlin.collections.ArrayList
 
 /** Simple Queue for awaiting asynchronous coroutines
   * DK96-OS : 2021 */
-class CoroutineQueue<T>(capacity: Int) {
-	private val mQueue: Queue<Deferred<T>> = ArrayBlockingQueue(capacity, true)
+class CoroutineQueue<T>(val capacity: Int) {
+	private val mQueue: Queue<Deferred<T?>> = ArrayBlockingQueue(capacity, true)
 
 	val count: Int get() = mQueue.size
 	
 	/** Add a deferred result to the Queue
 	 * @return True if the queue allowed the task to be added (didn't exceed capacity) */
-	fun add(task: Deferred<T>) = mQueue.offer(task)
+	fun add(task: Deferred<T?>) = mQueue.offer(task)
 
-	/** Block until next coroutine finishes, returns null if empty queue */
+	/** Block until next coroutine finishes, 
+	  * @return null if empty queue or task result is nullable  */
 	suspend fun awaitNext(): T? = mQueue.poll()?.await()
 
 	/** Await each element in the queue, add it to a list and return the list */
@@ -27,7 +28,8 @@ class CoroutineQueue<T>(capacity: Int) {
 		var task: Deferred<T>? = mQueue.poll()
 		val list = ArrayList<T>(mQueue.count())
 		while (task != null) {
-			list.add(task.await())
+			val result = task.await()
+			if (result != null) list.add(result)
 			task = mQueue.poll()
 		}
 		return list
@@ -52,16 +54,19 @@ class CoroutineQueue<T>(capacity: Int) {
 		/** Applies a suspendable transformation on a list using the CoroutineQueue
 		 * Skips using CoroutineQueue if input size is less than 2 */
 		suspend fun <A, B> transformList(
-			input: List<A>, transform: suspend (A) -> B
+			input: List<A>, transform: suspend (A) -> B?
 		): ArrayList<B> = when (input.size) {
 			0 -> arrayListOf()
-			1 -> arrayListOf(transform(input[0]))
+			1 -> {
+				val result = transform(input[0])
+				if (result != null) arrayListOf(result) else arrayListOf()
+			}
 			else -> {
-				val c = CoroutineQueue<B>(input.size)
+				val queue = CoroutineQueue<B>(input.size)
 				coroutineScope {input.forEach {a ->
-					c.add(async(Dispatchers.IO) { transform(a) })
+					queue.add(async(Dispatchers.IO) { transform(a) })
 				} }
-				c.awaitList()
+				queue.awaitList()
 			}
 		}
 	}
