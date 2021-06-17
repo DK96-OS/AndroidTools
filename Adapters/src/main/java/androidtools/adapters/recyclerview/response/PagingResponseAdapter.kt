@@ -1,3 +1,5 @@
+package androidtools.adapter.recyclerview.response
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -5,8 +7,6 @@ import androidx.annotation.LayoutRes
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 
-@Deprecated("Relies on ResponseVH, which is now deprecated",
-           level = DeprecationLevel.WARNING)
 /** A RecyclerView Adapter framework for producing responsive lists of Views
  * Developed by DK96-OS : 2020 */
 abstract class PagingResponseAdapter<Data>(

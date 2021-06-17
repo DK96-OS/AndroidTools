@@ -1,3 +1,5 @@
+package androidtools.adapter.recyclerview.viewbinding
+
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
