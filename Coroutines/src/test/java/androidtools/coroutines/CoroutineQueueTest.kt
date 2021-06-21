@@ -1,11 +1,12 @@
+package androidtools.coroutines
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -33,7 +34,7 @@ class CoroutineQueueTest {
 		key = Random.nextInt().ushr(25).toByte()	// shift to remove negatives
 	)}.toList()
 
-	@Before fun setup() { q1 = CoroutineQueue(capacity) }
+	@BeforeEach fun setup() { q1 = CoroutineQueue(capacity) }
 
 	@Test fun testInputKeysArePositive() {
 		for (input in inputList) assert(input.key >= 0)

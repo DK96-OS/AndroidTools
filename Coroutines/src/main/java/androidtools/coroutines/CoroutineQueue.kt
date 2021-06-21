@@ -1,3 +1,4 @@
+package androidtools.coroutines
 
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,7 @@ class CoroutineQueue<T>(val capacity: Int) {
 
 	/** Await each element in the queue, add it to a list and return the list */
 	suspend fun awaitList(): ArrayList<T> {
-		var task: Deferred<T>? = mQueue.poll()
+		var task: Deferred<T?>? = mQueue.poll()
 		val list = ArrayList<T>(mQueue.count())
 		while (task != null) {
 			val result = task.await()
@@ -37,7 +38,7 @@ class CoroutineQueue<T>(val capacity: Int) {
 
 	/** Block thread until queue is empty */
 	suspend fun awaitAll() {
-		var task: Deferred<T>? = mQueue.poll()
+		var task: Deferred<T?>? = mQueue.poll()
 		while (task != null) {
 			task.await()
 			task = mQueue.poll()
