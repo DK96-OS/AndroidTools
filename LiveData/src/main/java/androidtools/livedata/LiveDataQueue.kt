@@ -2,41 +2,42 @@ package androidtools.livedata
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.util.*
+import java.util.Queue
+import java.util.concurrent.ArrayBlockingQueue
 
-/** A Queue that uses a LiveData to initiate event/data handling
- * Developed by DK96-OS : 2020 - 2021 */
-class LiveDataQueue<T>(qSize: Int = 3) {
+/** A Queue that relies on LiveData observer for processing */
+class LiveDataQueue<T>(qSize: Int = 4) {
 
-	val liveData: LiveData<Queue<T>>
-		get() = mLiveData
-	private val mLiveData = MutableLiveData<Queue<T>>()
+    val liveData: LiveData<Queue<T>> get() = mLiveData
 
-	private val mQueue: Deque<T> = ArrayDeque(qSize)
+    private val mLiveData = MutableLiveData<Queue<T>>()
 
-	/** Post the Queue to the LiveData */
-	fun repost() { mLiveData.postValue(mQueue) }
+    // Fixed size reusable queue structure
+    private val mQueue: Queue<T> = ArrayBlockingQueue(qSize)
 
-	/** Queues an event */
-	fun queueEvent(e: T): Boolean {
-		val isQueued = mQueue.offer(e)
-		return if (isQueued) {
-			repost()
-			true
-		} else {
-			if (mQueue.size > 0) repost()
-			false
-		}
-	}
+    /** Post the Queue to the LiveData */
+    fun repost() { mLiveData.postValue(mQueue) }
 
-	/** Queues up events, and posts to LiveData.
-	 * @return Any items that couldn't be queued (due to capacity), otherwise null */
-	fun queueEvents(vararg e: T): List<T>? {
-		var counter = 0
-		while (counter < e.size && mQueue.offer(e[counter])) counter++
-		repost()
-		return if (counter < e.size) e.drop(counter) else null
-	}
+    /** Queues an event */
+    fun queueEvent(e: T): Boolean {
+        val isQueued = mQueue.offer(e)
+        return if (isQueued) {
+            repost()
+            true
+        } else {
+            if (mQueue.size > 0) repost()
+            false
+        }
+    }
 
-	fun clear() { mQueue.clear() }
+    /** Queues up events, and posts to LiveData.
+     *  Returns items that couldn't be queued */
+    fun queueEvents(vararg e: T): List<T>? {
+        var counter = 0
+        while (counter < e.size && mQueue.offer(e[counter])) counter++
+        repost()
+        return if (counter < e.size) e.drop(counter) else null
+    }
+
+    fun clear() { mQueue.clear() }
 }
