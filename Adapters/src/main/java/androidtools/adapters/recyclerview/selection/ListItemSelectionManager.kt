@@ -1,11 +1,12 @@
-/** Developed by DK96-OS : 2018 - 2020 */
+package androidtools.adapters.recyclerview.selection
 
 import android.util.SparseBooleanArray
 import androidx.core.util.forEach
 import androidx.core.util.isEmpty
 import java.lang.ref.WeakReference
 
-/** Contains a list of selected items, manages updates, and notifies a listener */
+/** Contains a list of selected items, manages updates, and notifies a listener 
+  *  Developed by DK96-OS : 2018 - 2020 */
 class ListItemSelectionManager(listener: Listener) {
 
     interface Listener {

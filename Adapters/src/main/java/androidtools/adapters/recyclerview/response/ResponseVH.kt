@@ -1,11 +1,11 @@
-/** Developed by DK96-OS : 2018 - 2020 */
+package androidtools.adapter.recyclerview.response
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-@Deprecated("Use a ViewHolder that supports ViewBinding")
-/** Reusable ViewHolder solution for easy RecyclerView setup */
+/** Reusable ViewHolder solution for easy RecyclerView setup 
+   * Developed by DK96-OS : 2018 - 2020 */
 open class ResponseVH(v: View, listener: Listener): RecyclerView.ViewHolder(v) {
 
     /** Response Callback Interface */

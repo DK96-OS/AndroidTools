@@ -1,4 +1,4 @@
-/** Developed by DK96-OS : 2018 - 2020 */
+package androidtools.adapter.recyclerview.response
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
-@Deprecated("Use an adapter that supports ViewBinding", 
-            level = DeprecationLevel.WARNING)
-/** A RecyclerView Adapter framework for producing responsive lists of Views */
+/** A RecyclerView Adapter framework for producing responsive lists of Views
+  *  Developed by DK96-OS : 2018 - 2020 */
 abstract class ResponseAdapter(
     /** The Layout Resource Id to inflate for every ViewHolder */
     @LayoutRes protected val layoutId: Int,

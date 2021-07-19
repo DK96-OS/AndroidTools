@@ -1,3 +1,5 @@
+package androidtools.context.network
+
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
