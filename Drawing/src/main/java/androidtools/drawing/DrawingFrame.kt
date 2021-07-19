@@ -32,7 +32,7 @@ open class DrawingFrame {
     val horizontalPx: Float get() = right - left
 
     /** Provide additional frame boundary offsets, applied after View padding */
-    protected fun updateShifts(
+    open fun updateShifts(
         left: Float = 0f, right: Float = 0f, 
         bottom: Float = 0f, top: Float = 0f
     ) {
@@ -61,10 +61,10 @@ open class DrawingFrame {
     }
   
     /** Get Y draw coordinate from a fraction. Uses the bottom y value. */
-    fun yFraction(f: Float): Float = bottom - f * verticalPx
+    open fun yFraction(f: Float): Float = bottom - f * verticalPx
   
     /** Get X draw location at a fraction of the DrawingFrame. Uses the left X value. */
-    fun xFraction(f: Float): Float = left + f * horizontalPx
+    open fun xFraction(f: Float): Float = left + f * horizontalPx
 
     companion object {
         /** Insert a line at X, where X is in the interval [0,1] */
