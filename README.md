@@ -3,12 +3,8 @@
 
 ***
 
-### RecyclerView
-Flexible and convenient Adapters for `RecyclerView`.
- - ViewBinding
- - Event Handling
- - Paging
- - AsyncList Diff
+### Adapters (RecyclerView)
+__This module is being removed from this repository, and will be available in android-adapters repository__
 
 Check out the [RecyclerView wiki](https://github.com/DK96-OS/AndroidTools/wiki/RecyclerView).
 
@@ -34,8 +30,6 @@ Check out the [Coroutines wiki](https://github.com/DK96-OS/AndroidTools/wiki/Cor
 ***
 
 ### Drawing
-Custom View graphics management.
- - Drawing Coordinate calculations
- - `Paint` object management
+__This module is being removed from this repository, and will be available in android-drawing-views repository__
 
 Check out the [Drawing wiki](https://github.com/DK96-OS/AndroidTools/wiki/Drawing).
