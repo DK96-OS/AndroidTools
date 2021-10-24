@@ -1,2 +1,2 @@
 rootProject.name = "AndroidTools"
-include(":Coroutines", ":Adapters", ":Context")
+include(":Coroutines", ":Context")
