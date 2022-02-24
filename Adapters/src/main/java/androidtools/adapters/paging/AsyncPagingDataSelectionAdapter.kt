@@ -1,14 +1,14 @@
 package androidtools.adapters.paging
 
+import androidtools.adapters.actionmode.KeyIndexSelectionManager
 import androidx.lifecycle.Lifecycle
 import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import androidx.recyclerview.widget.RecyclerView
-import androidtools.adapters.actionmode.KeyIndexSelectionManager
 
-/** 
+/** Adapter providing Paging3 and Item Selection
  * @author DK96-OS : 2021 */
 abstract class AsyncPagingDataSelectionAdapter<
         VH : RecyclerView.ViewHolder,

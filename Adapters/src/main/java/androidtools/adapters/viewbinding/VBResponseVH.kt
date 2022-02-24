@@ -4,13 +4,16 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-/** Response ViewHolder that uses ViewBinding
- * Developed by DK96-OS : 2018 - 2021 */
+/** ViewHolder that provides ViewBinding
+ * @author DK96-OS : 2018 - 2021 */
 class VBResponseVH<Bind>(
-	binding: Bind, rootView: View, listener: Listener
+	binding: Bind,
+	rootView: View,
+	listener: Listener,
 ) : RecyclerView.ViewHolder(rootView) {
 
-	constructor(b: Pair<Bind, View>, l: Listener) : this(b.first, b.second, l)
+	constructor(b: Pair<Bind, View>, l: Listener)
+		: this(b.first, b.second, l)
 
 	/** Response Callback Interface */
 	interface Listener {
@@ -28,5 +31,7 @@ class VBResponseVH<Bind>(
 
 	/** Sends an action to the Listener, with the current index
 	 * @param k A key for the intended response */
-	fun action(k: String? = null) { aListener.get()?.respond(adapterPosition, k) }
+	fun action(k: String? = null) {
+		aListener.get()?.respond(bindingAdapterPosition, k)
+	}
 }

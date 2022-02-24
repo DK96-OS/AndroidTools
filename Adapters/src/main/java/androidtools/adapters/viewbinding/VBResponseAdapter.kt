@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-/** ResponseAdapter with ViewBinding support 
- * Developed by DK96-OS : 2018 - 2021 */
+/** Adapter with ViewBinding support
+ * @author DK96-OS : 2018 - 2021 */
 abstract class VBResponseAdapter<Bind>(
 	private val automaticAction: Boolean = false
 ) : RecyclerView.Adapter<VBResponseVH<Bind>>(), VBResponseVH.Listener {
@@ -31,7 +31,7 @@ abstract class VBResponseAdapter<Bind>(
 	else {
 		val (b, v) = bindRoot(LayoutInflater.from(parent.context), parent)
 		val vh = VBResponseVH(b, v, this)
-		v.setOnClickListener { respond(vh.adapterPosition) }
+		v.setOnClickListener { respond(vh.bindingAdapterPosition) }
 		vh
 	}
 
@@ -39,12 +39,4 @@ abstract class VBResponseAdapter<Bind>(
 		holder.getBinding()?.also { b -> bindView(b, position) }
 	}
 
-	companion object {
-		/** Safely obtain data from a nullable List.
-		 * @param index The index of the data
-		 * @param list A potentially nullable or empty list
-		 * @return Either the data in the list if everything was valid, or null */
-		fun <T> getFromList(index: Int, list: List<T>?)
-			: T? = if (list != null && index in list.indices) list[index] else null
-	}
 }

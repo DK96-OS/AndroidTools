@@ -1,9 +1,9 @@
 package androidtools.adapters.diff
 
-import androidx.recyclerview.widget.*
 import androidtools.adapters.actionmode.IndexSelectionManager
+import androidx.recyclerview.widget.*
 
-/** 
+/** Adapter providing AsyncDiff and Item Selection
  * @author DK96-OS : 2021 */
 abstract class AsyncDiffSelectionAdapter<VH : RecyclerView.ViewHolder, Data : Any>(
     diffCallback: DiffUtil.ItemCallback<Data>,

@@ -2,7 +2,7 @@ package androidtools.adapters.actionmode
 
 import androidx.collection.ArraySet
 
-/**
+/** Maintains a list of selected indices
  * @author DK96-OS : 2021 */
 class IndexSelectionManager {
 

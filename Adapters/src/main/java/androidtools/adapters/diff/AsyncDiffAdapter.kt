@@ -2,7 +2,7 @@ package androidtools.adapters.diff
 
 import androidx.recyclerview.widget.*
 
-/** 
+/** Adapter providing AsyncDiff
  * @author DK96-OS : 2021 */
 abstract class AsyncDiffAdapter<VH : RecyclerView.ViewHolder, Data : Any>(
         diffCallback: DiffUtil.ItemCallback<Data>,
