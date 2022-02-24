@@ -1,7 +1,7 @@
-package androidtools.context
+package androidtools.view.context
 
-import android.text.format.DateUtils
 import android.content.Context
+import android.text.format.DateUtils
 
 /** Format timestamp values as date and time strings */
 

@@ -1,10 +1,11 @@
-package androidtools.context
+package androidtools.view.context
 
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -15,7 +16,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 
 /** Context and Activity convenience */
-    
+
 /** Display a Toast */
 fun Context.showToast(s: String, t: Int = Toast.LENGTH_SHORT) { 
     Toast.makeText(this, s, t).show()
