@@ -1,3 +1,4 @@
+package androidtools.view.drawing
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -80,7 +81,7 @@ open class DrawingFrame {
             p.lineTo(right, yCanvas)
         }
         /** Draw a vertical line directly onto Canvas, where x is in the interval [0,1] */
-        fun DrawingFrame.verticalLine(c: Canvas, x: Float, p: Paint) { 
+        fun DrawingFrame.verticalLine(c: Canvas, x: Float, p: Paint) {
             c.drawLine(x, bottom, x, top, p)
         }
         /** Draw a horizontal line directly onto Canvas, where y is in the interval [0,1] */
