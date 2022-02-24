@@ -1,4 +1,4 @@
-package androidtools.coroutines
+package androidtools.data.coroutine
 
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers

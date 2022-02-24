@@ -1,4 +1,4 @@
-package androidtools.coroutines
+package androidtools.data.coroutine
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
@@ -7,7 +7,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
@@ -29,12 +28,15 @@ class CoroutineQueueTest {
 	private lateinit var q1: CoroutineQueue<ProcessOutput>
 
   	/** Generate immutable input data to be used in all tests */
-	private val inputList: List<ProcessInput> = Array(capacity) {ProcessInput(
+	private val inputList: List<ProcessInput> = Array(capacity) {
+        ProcessInput(
 		stream = Random.nextBytes(64).sortedArray(),	// sort to avoid string init issues
 		key = Random.nextInt().ushr(25).toByte()	// shift to remove negatives
-	)}.toList()
+	)
+    }.toList()
 
-	@BeforeEach fun setup() { q1 = CoroutineQueue(capacity) }
+	@BeforeEach fun setup() { q1 = CoroutineQueue(capacity)
+    }
 
 	@Test fun testInputKeysArePositive() {
 		for (input in inputList) assert(input.key >= 0)

@@ -1,8 +1,8 @@
-package androidtools.livedata
+package androidtools.data.live
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.util.Queue
+import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 
 /** A Queue that relies on LiveData observer for processing */
