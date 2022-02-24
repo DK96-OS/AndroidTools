@@ -14,7 +14,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Adapters" />
             <option value="$PROJECT_DIR$/Context" />
-            <option value="$PROJECT_DIR$/Coroutines" />
+            <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/Drawing" />
           </set>
         </option>
