@@ -1,4 +1,4 @@
-package androidtools.adapter.recyclerview.viewbinding
+package androidtools.adapters.viewbinding
 
 import android.view.LayoutInflater
 import android.view.View
