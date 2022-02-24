@@ -15,7 +15,7 @@
             <option value="$PROJECT_DIR$/Adapters" />
             <option value="$PROJECT_DIR$/Context" />
             <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/Drawing" />
+            <option value="$PROJECT_DIR$/view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
