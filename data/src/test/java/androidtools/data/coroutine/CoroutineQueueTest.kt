@@ -4,9 +4,9 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
@@ -35,14 +35,18 @@ class CoroutineQueueTest {
 	)
     }.toList()
 
-	@BeforeEach fun setup() { q1 = CoroutineQueue(capacity)
+	@Before
+	fun setup() {
+		q1 = CoroutineQueue(capacity)
     }
 
-	@Test fun testInputKeysArePositive() {
+	@Test
+	fun testInputKeysArePositive() {
 		for (input in inputList) assert(input.key >= 0)
 	}
 
-	@Test fun testAwaitList() {
+	@Test
+	fun testAwaitList() {
 		val output = runBlocking {
 			println("Loadin Queue: ${System.nanoTime()}")
 			for (i in inputList) q1.add(async {
