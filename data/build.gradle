@@ -8,14 +8,17 @@ android {
     compileSdkVersion android.sdk
     buildToolsVersion android.buildTools
     defaultConfig {
-    	minSdkVersion android.minSdk
+        minSdkVersion android.minSdk
         targetSdkVersion android.sdk
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -23,20 +26,15 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = '11'
     }
 }
 
 dependencies {
-    implementation android.core
-    implementation android.appcompat
-    implementation android.material
-    implementation paging.runtime
-    testImplementation paging.common
+    implementation android.lifecycle
+    implementation coroutines.android
+    testImplementation coroutines.test
 
     // JUnit 5
-    testImplementation platform("org.junit:junit-bom:5.7.2")
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "org.junit.jupiter:junit-jupiter-params"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation "junit:junit:4.13.2"
 }
