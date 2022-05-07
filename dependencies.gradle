@@ -3,7 +3,7 @@ ext {
     android = [
             sdk : 31,
             minSdk : 23,
-            buildTools : "31.0.0",
+            buildTools : "32.0.0",
             core : 'androidx.core:core-ktx:1.7.0',
             appcompat : 'androidx.appcompat:appcompat:1.4.1',
             lifecycle : 'androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1',
@@ -16,8 +16,8 @@ ext {
     ]
 
     coroutines = [
-            android : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0",
-            test : "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+            android : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1",
+            test : "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
     ]
 
 }
