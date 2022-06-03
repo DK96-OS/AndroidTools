@@ -25,14 +25,6 @@ Check out the [Context wiki](https://github.com/DK96-OS/AndroidTools/wiki/Contex
 
 ***
 
-### Coroutines
-Asynchronous micro thread management.
- - Coroutine Queue
-
-Check out the [Coroutines wiki](https://github.com/DK96-OS/AndroidTools/wiki/Coroutines).
-
-***
-
 ### Drawing
 Custom View graphics management.
  - Drawing Coordinate calculations
